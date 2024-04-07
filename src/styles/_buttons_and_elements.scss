@@ -1,0 +1,139 @@
+.last-column {
+  background-color: white;
+  border: none;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+  }
+}
+
+.pagination-controls {
+  span {
+    margin: 5px;
+  }
+  button {
+    font-size: 10px;
+  }
+  font-size: 14px;
+}
+
+.delete-button {
+  padding: 0.2em;
+  font-size: 1.8em;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  color: #f44336;
+  cursor: pointer;
+
+  &:hover {
+    color: #d32f2f;
+  }
+}
+
+.data-with-button {
+  position: relative;
+  text-align: left;
+}
+
+.add-row {
+  padding: 10px 0;
+  background-color: #e8f0fe;
+  transition: background-color 0.5s;
+  &:hover {
+    background-color: darken(#e8f0fe, 5%);
+  }
+}
+
+.full-cell-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  color: #007bff;
+  text-decoration: none;
+  font-size: 0.8em;
+  line-height: 0.5;
+}
+
+.table-resize-handle {
+  position: absolute;
+  background: #ccc;
+  z-index: 1;
+}
+
+.column-resize-handle {
+  top: 0;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  cursor: col-resize;
+}
+
+.row-resize-handle {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  cursor: row-resize;
+}
+
+@media (max-width: 1024px) {
+  .pagination-controls {
+    button {
+      font-size: 10px;
+    }
+    font-size: 14px;
+  }
+
+  .delete-button {
+    font-size: 1.5em;
+  }
+}
+
+@media (max-width: 768px) {
+  .pagination-controls {
+    button {
+      font-size: 10px;
+    }
+    font-size: 14px;
+  }
+
+  .delete-button {
+    font-size: 1.8em;
+  }
+}
+
+@media (max-width: 480px) {
+  .pagination-controls {
+    font-size: 12px;
+  }
+
+  .delete-button {
+    font-size: 1.7em;
+  }
+}
+
+@media (max-width: 320px) {
+  .pagination-controls {
+    button {
+      font-size: 8px;
+    }
+    font-size: 10px;
+  }
+
+  .delete-button {
+    font-size: 1.6em;
+  }
+}

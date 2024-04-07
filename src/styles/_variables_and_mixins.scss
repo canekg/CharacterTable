@@ -1,0 +1,28 @@
+$background-color: #f3f4f6;
+$primary-color: #a6c0fe;
+$secondary-color: #f68084;
+$hover-color: darken($primary-color, 10%);
+$font-color: #333;
+$border-color: #e1e1e1;
+
+@mixin button-style {
+  padding: 0.5em 1em;
+  background-color: $primary-color;
+  color: white;
+  border-radius: 0.3em;
+  cursor: pointer;
+  transition:
+    background-color 0.5s,
+    transform 0.5s;
+  border: 1px solid #0d0d0d;
+  font-size: calc(0.65em + 0.5vw);
+
+  &:hover {
+    background-color: $hover-color;
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+}

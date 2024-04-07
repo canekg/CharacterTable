@@ -1,0 +1,130 @@
+table {
+  width: 100%;
+  max-width: 75%;
+  border-collapse: collapse;
+  background-color: $background-color;
+  margin: 1em auto;
+  box-sizing: border-box;
+
+  th,
+  td {
+    box-sizing: border-box;
+    text-align: left;
+    padding: 0.5em;
+    border-bottom: 1px solid $border-color;
+    padding: 5px;
+    font-size: calc(0.6em + 0.5vw);
+    position: relative;
+
+    .td-text {
+      display: flex;
+      height: 100%;
+    }
+
+    &:hover {
+      background-color: $hover-color;
+      color: white;
+    }
+  }
+
+  th {
+    background-color: $primary-color;
+    color: white;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: relative;
+    padding: 0.5em 25px;
+
+    .th-text {
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+
+    .resize-handle {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 10px;
+      height: 100%;
+      background-color: #ccc;
+      cursor: col-resize;
+      z-index: 1;
+      &:hover {
+        background-color: darken(#ccc, 10%);
+      }
+    }
+
+    .sort-symbol {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      transition: all 0.5s ease;
+      &:after {
+        content: '↕';
+      }
+      &.asc::after {
+        content: '↑';
+      }
+      &.desc::after {
+        content: '↓';
+      }
+    }
+  }
+
+  tr {
+    position: relative;
+  }
+}
+
+@media (max-width: 1024px) {
+  table,
+  th,
+  td {
+    font-size: calc(0.6em + 1vw);
+  }
+}
+
+@media (max-width: 768px) {
+  table {
+    margin: 0.5em auto;
+    th,
+    td {
+      padding: 0.4em;
+      font-size: calc(0.6em + 0.4vw);
+    }
+    th {
+      padding-left: 8px;
+      padding-right: 8px;
+      .sort-symbol {
+        right: 7px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  table {
+    min-width: 100%;
+  }
+  table th,
+  table td {
+    font-size: calc(0.65em + 0.5vw);
+    button {
+      font-size: calc(0.65em + 0.5vw);
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  table {
+    max-width: 100%;
+    button {
+      font-size: calc(0.65em + 0.5vw);
+    }
+  }
+}
