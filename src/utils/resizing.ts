@@ -1,6 +1,5 @@
 import { ResizingState } from '@/types/storeTypes';
 
-// Функция для инициализации состояния ресайзинга из localStorage
 export const loadResizingState = (): ResizingState => {
   const savedColumnWidths = JSON.parse(localStorage.getItem('columnWidths') || '{}');
   const savedRowHeights = JSON.parse(localStorage.getItem('rowHeights') || '{}');
@@ -11,13 +10,11 @@ export const loadResizingState = (): ResizingState => {
   };
 };
 
-// Функция для сохранения состояния ресайзинга в localStorage
 export const saveResizingState = (resizingState: ResizingState): void => {
   localStorage.setItem('columnWidths', JSON.stringify(resizingState.columnWidths));
   localStorage.setItem('rowHeights', JSON.stringify(resizingState.rowHeights));
 };
 
-// Функция для обновления размеров
 export const updateDimensions = (
   prevState: ResizingState,
   index: string,
@@ -29,7 +26,6 @@ export const updateDimensions = (
   rowHeights: height ? { ...prevState.rowHeights, [index]: height } : prevState.rowHeights,
 });
 
-// Функция для обработки события onMouseDown на элементах управления ресайзингом
 export const onResizeMouseDown = (
   event: React.MouseEvent<HTMLDivElement>,
   index: string,

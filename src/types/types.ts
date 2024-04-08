@@ -8,3 +8,5 @@ export interface IColumn {
   resizable: boolean;
   isLast?: boolean;
 }
+
+export type SetCurrentPageType = (page: number) => void;

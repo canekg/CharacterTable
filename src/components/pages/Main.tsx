@@ -12,6 +12,9 @@ import {
   saveResizingState,
   updateDimensions,
 } from '@/utils/resizing';
+
+import { closeModal, confirmDeletion, openModal } from '@/utils/modal';
+import { goToFirstPage, goToLastPage, goToNextPage, goToPreviousPage } from '@/utils/pagination';
 import { observer } from 'mobx-react-lite';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -28,7 +31,6 @@ const TableComponent: React.FC = observer(() => {
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
   const [resizingState, setResizingState] = useState<ResizingState>(loadResizingState());
   const [nameDeletedCharacter, setNameDeletedCharacter] = useState<string | null>(null);
-
   const { currentPage, setCurrentPage } = store;
 
   const { t } = useTranslation();
@@ -91,21 +93,10 @@ const TableComponent: React.FC = observer(() => {
     }
   }, [currentPage, store.characters.length]);
 
-  const handlePreviousClick = () => {
-    store.setCurrentPage(Math.max(currentPage - 1, 1));
-  };
-
-  const handleNextClick = () => {
-    store.setCurrentPage(Math.min(currentPage + 1, totalPages));
-  };
-
-  const handleFirstPageClick = () => {
-    setCurrentPage(1);
-  };
-
-  const handleLastPageClick = () => {
-    setCurrentPage(totalPages);
-  };
+  const handlePreviousClick = () => goToPreviousPage(currentPage, setCurrentPage);
+  const handleNextClick = () => goToNextPage(currentPage, totalPages, setCurrentPage);
+  const handleFirstPageClick = () => goToFirstPage(setCurrentPage);
+  const handleLastPageClick = () => goToLastPage(totalPages, setCurrentPage);
 
   const handleDragStart = (e: React.DragEvent<HTMLTableRowElement>, index: number) => {
     if (resizingState.isResizing) {
@@ -136,25 +127,16 @@ const TableComponent: React.FC = observer(() => {
     store.sortCharacters(field, isSortAscending);
   };
 
-  const openModal = (index: number) => {
-    setIsModalVisible(true);
-    setSelectedCharacter(index);
-    setNameDeletedCharacter(currentItems[index].name);
+  const handleOpenModal = (index: number, name: string) => {
+    openModal(setIsModalVisible, setSelectedCharacter, setNameDeletedCharacter, index, name);
   };
 
-  const confirmDeletion = () => {
-    if (selectedCharacter !== null) {
-      store.removeCharacter(selectedCharacter);
-      setIsModalVisible(false);
-      toast.success(t('character_removed_success'), {
-        autoClose: 1500,
-        closeOnClick: true,
-      });
-    }
+  const handleConfirmDeletion = () => {
+    confirmDeletion(selectedCharacter, store, setIsModalVisible, toast, t);
   };
 
-  const closeModal = () => {
-    setIsModalVisible(false);
+  const handleCloseModal = () => {
+    closeModal(setIsModalVisible, setSelectedCharacter, setNameDeletedCharacter);
   };
 
   const handleSortClick = (field: keyof ICharacter) => {
@@ -168,8 +150,8 @@ const TableComponent: React.FC = observer(() => {
         <div className="modal-container">
           <div className="modal">
             <p>{t('modal.confirm_deletion_message', { name: nameDeletedCharacter })}</p>
-            <button onClick={confirmDeletion}>{t('modal.confirm')}</button>
-            <button onClick={closeModal}>{t('modal.cancel')}</button>
+            <button onClick={handleConfirmDeletion}>{t('modal.confirm')}</button>
+            <button onClick={handleCloseModal}>{t('modal.cancel')}</button>
           </div>
         </div>
       )}
@@ -215,7 +197,10 @@ const TableComponent: React.FC = observer(() => {
                       {column.isLast ? (
                         <>
                           <span className="td-text">{character[column.key]}</span>
-                          <button className="delete-button" onClick={() => openModal(index)}>
+                          <button
+                            className="delete-button"
+                            onClick={() => handleOpenModal(index, character.name)}
+                          >
                             &times;
                           </button>
                         </>
