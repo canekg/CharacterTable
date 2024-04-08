@@ -7,7 +7,7 @@ const Footer: React.FC = observer(() => {
   const { t } = useTranslation();
   return (
     <footer className="footer">
-      <div className="content">
+      <div className="footer-content">
         <p>{t('footer.love')}</p>
         <div className="social-links">
           <a href={'https://github.com/canekg'} target="_blank" rel="noopener noreferrer">
