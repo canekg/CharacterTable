@@ -6,6 +6,12 @@ import '@/styles/main.scss';
 import { ICharacter } from '@/types/api';
 import { ResizingState } from '@/types/storeTypes';
 import { HeaderMap } from '@/types/types';
+import {
+  loadResizingState,
+  onResizeMouseDown,
+  saveResizingState,
+  updateDimensions,
+} from '@/utils/resizing';
 import { observer } from 'mobx-react-lite';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -20,11 +26,7 @@ const TableComponent: React.FC = observer(() => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedCharacter, setSelectedCharacter] = useState<number | null>(null);
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
-  const [resizingState, setResizingState] = useState<ResizingState>({
-    columnWidths: {},
-    rowHeights: {},
-    isResizing: false,
-  });
+  const [resizingState, setResizingState] = useState<ResizingState>(loadResizingState());
   const [nameDeletedCharacter, setNameDeletedCharacter] = useState<string | null>(null);
 
   const { currentPage, setCurrentPage } = store;
@@ -46,6 +48,21 @@ const TableComponent: React.FC = observer(() => {
   const currentItems = store.characters.slice(startItemIndex, endItemIndex);
   const dataAvailabilityText = store.isLoading ? t('loading_data') : t('data_availability_text');
 
+  const handleResizeMouseDown = useCallback(
+    (event: React.MouseEvent<HTMLDivElement>, index: string, isColumn: boolean) => {
+      onResizeMouseDown(
+        event,
+        index,
+        isColumn,
+        (index, width, height) => {
+          setResizingState((prevState) => updateDimensions(prevState, index, width, height));
+        },
+        setResizingState,
+      );
+    },
+    [],
+  );
+
   useEffect(() => {
     const savedColumnWidths = JSON.parse(localStorage.getItem('columnWidths') || '{}');
     const savedRowHeights = JSON.parse(localStorage.getItem('rowHeights') || '{}');
@@ -56,53 +73,9 @@ const TableComponent: React.FC = observer(() => {
     });
   }, []);
 
-  const updateDimensions = useCallback(
-    (index: string, width?: string, height?: string) => {
-      setResizingState((prevState) => ({
-        ...prevState,
-        columnWidths: width
-          ? { ...prevState.columnWidths, [index]: width }
-          : prevState.columnWidths,
-        rowHeights: height ? { ...prevState.rowHeights, [index]: height } : prevState.rowHeights,
-      }));
-    },
-    [resizingState.columnWidths, resizingState.rowHeights],
-  );
-
   useEffect(() => {
-    localStorage.setItem('columnWidths', JSON.stringify(resizingState.columnWidths));
-    localStorage.setItem('rowHeights', JSON.stringify(resizingState.rowHeights));
-  }, [resizingState.columnWidths, resizingState.rowHeights]);
-
-  const onResizeMouseDown = useCallback(
-    (event: React.MouseEvent<HTMLDivElement>, index: string, isColumn: boolean) => {
-      setResizingState((prevState) => ({ ...prevState, isResizing: true }));
-      const startX = event.clientX;
-      const startY = event.clientY;
-      const startWidth = event.currentTarget.parentElement?.offsetWidth || 0;
-      const startHeight = event.currentTarget.parentElement?.offsetHeight || 0;
-
-      const onMove = (moveEvent: MouseEvent) => {
-        if (isColumn) {
-          const currentWidth = startWidth + (moveEvent.clientX - startX);
-          updateDimensions(index, `${currentWidth}px`, undefined);
-        } else {
-          const currentHeight = startHeight + (moveEvent.clientY - startY);
-          updateDimensions(index, undefined, `${currentHeight}px`);
-        }
-      };
-
-      const onUp = () => {
-        document.removeEventListener('mousemove', onMove);
-        document.removeEventListener('mouseup', onUp);
-        setResizingState((prevState) => ({ ...prevState, isResizing: false }));
-      };
-
-      document.addEventListener('mousemove', onMove);
-      document.addEventListener('mouseup', onUp);
-    },
-    [updateDimensions],
-  );
+    saveResizingState(resizingState);
+  }, [resizingState]);
 
   useEffect(() => {
     const totalPages =
@@ -215,7 +188,7 @@ const TableComponent: React.FC = observer(() => {
                   {index !== Object.entries(HEADERS).length - 1 ? (
                     <div
                       className="table-resize-handle column-resize-handle"
-                      onMouseDown={(e) => onResizeMouseDown(e, headerKey, true)}
+                      onMouseDown={(e) => handleResizeMouseDown(e, headerKey, true)}
                     />
                   ) : null}
                   <span
@@ -251,13 +224,13 @@ const TableComponent: React.FC = observer(() => {
                           <span className="td-text">{character[column.key]}</span>
                           <div
                             className="table-resize-handle column-resize-handle"
-                            onMouseDown={(e) => onResizeMouseDown(e, column.key, true)}
+                            onMouseDown={(e) => handleResizeMouseDown(e, column.key, true)}
                           />
                         </>
                       )}
                       <div
                         className="table-resize-handle row-resize-handle"
-                        onMouseDown={(e) => onResizeMouseDown(e, index.toString(), false)}
+                        onMouseDown={(e) => handleResizeMouseDown(e, index.toString(), false)}
                       />
                     </td>
                   ))}
