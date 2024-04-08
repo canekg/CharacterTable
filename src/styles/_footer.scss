@@ -5,8 +5,8 @@
   background: linear-gradient(to left, $primary-color, $secondary-color);
   padding: 0;
   box-sizing: border-box;
-  padding: 1em; /* Перемещено в начало для соблюдения порядка */
-  border-top: 1px solid $border-color; /* Перемещено после padding */
+  padding: 1em; 
+  border-top: 1px solid $border-color; 
   color: $font-color;
   display: flex;
   justify-content: center;
@@ -14,7 +14,7 @@
 
   .footer-content {
     width: 85%;
-    text-align: center; /* Перемещено перед width */
+    text-align: center;
     p {
       margin: 0.5em 0;
       font-size: calc(0.6em + 1vw); 

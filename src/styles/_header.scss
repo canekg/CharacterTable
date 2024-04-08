@@ -3,7 +3,7 @@
   margin: 0;
   border-bottom: 1px solid $border-color;
   background: linear-gradient(to right, $primary-color, $secondary-color);
-  padding-bottom: 10px; /* Уменьшаем внутренний отступ снизу до 10px */
+  padding-bottom: 10px; 
 
   .header-content {
     display: flex;
@@ -70,7 +70,7 @@
       margin: 0; 
       padding: 0;
       max-width: none;
-      width: 99%;
+      width: 100%;
     }
   }
   .header .header-content .title {
