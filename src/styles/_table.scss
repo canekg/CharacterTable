@@ -1,6 +1,6 @@
 table {
-  width: 100%;
-  max-width: 75%;
+  width: 100%; /* Добавлено */
+  max-width: none; /* Добавлено */
   border-collapse: collapse;
   background-color: $background-color;
   margin: 1em auto;
