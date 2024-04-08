@@ -64,7 +64,7 @@ export default {
       title: 'Star Wars Characters',
       load_data_button: 'Load Data',
       clear_table_button: 'Clear Table',
-      toggle_language_button: 'Ru',
+      toggle_language_button: 'RU',
     },
   },
 };

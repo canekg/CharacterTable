@@ -64,7 +64,7 @@ export default {
       title: 'Персонажи "Звездных войн"',
       load_data_button: 'Загрузить данные',
       clear_table_button: 'Очистить таблицу',
-      toggle_language_button: 'Англ',
+      toggle_language_button: 'EN',
     },
   },
 };
