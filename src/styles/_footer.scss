@@ -13,7 +13,7 @@
   align-items: center;
 
   .footer-content {
-    width: 75%;
+    width: 85%;
     text-align: center; /* Перемещено перед width */
     p {
       margin: 0.5em 0;
@@ -40,7 +40,9 @@
     .content p {
       font-size: calc(0.7em + 1vw); 
     }
-
+    .footer-content {
+      width: 100%;
+    }
     .social-links a {
       font-size: 1em; 
     }
