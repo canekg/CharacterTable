@@ -1,6 +1,6 @@
+import store from '@/store/Store';
 import { ICharacter } from '@/types/api';
-
-type SortOrder = 'asc' | 'desc';
+import { SortOrder } from '@/types/types';
 
 export const sortCharacters = (
   characters: ICharacter[],
@@ -16,4 +16,8 @@ export const sortCharacters = (
     }
     return 0;
   });
+};
+
+export const sortCharactersByField = (field: keyof ICharacter, isAscending: boolean) => {
+  store.sortCharacters(field, isAscending);
 };

@@ -14,6 +14,7 @@ import {
   saveResizingState,
   updateDimensions,
 } from '@/utils/resizing';
+import { sortCharactersByField } from '@/utils/sorting';
 import { observer } from 'mobx-react-lite';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -82,7 +83,6 @@ const TableComponent: React.FC = observer(() => {
   useEffect(() => {
     const totalPages =
       store.characters.length === 0 ? 1 : Math.ceil(store.characters.length / ITEMS_PER_PAGE);
-
     if (currentPage > totalPages) {
       setCurrentPage(totalPages);
       localStorage.setItem('currentPage', totalPages.toString());
@@ -121,12 +121,6 @@ const TableComponent: React.FC = observer(() => {
     store.setCharacters(newRows);
   };
 
-  const sortPeopleByField = (field: keyof ICharacter) => {
-    setSortField(field);
-    setIsSortAscending(!isSortAscending);
-    store.sortCharacters(field, isSortAscending);
-  };
-
   const handleOpenModal = (index: number, name: string) => {
     openModal(setIsModalVisible, setSelectedCharacter, setNameDeletedCharacter, index, name);
   };
@@ -140,7 +134,9 @@ const TableComponent: React.FC = observer(() => {
   };
 
   const handleSortClick = (field: keyof ICharacter) => {
-    sortPeopleByField(field);
+    setSortField(field);
+    setIsSortAscending(!isSortAscending);
+    sortCharactersByField(field, isSortAscending);
   };
 
   return (
@@ -172,7 +168,7 @@ const TableComponent: React.FC = observer(() => {
                   ) : null}
                   <span
                     className={`sort-symbol ${getSortSymbolClass(headerKey, sortField, isSortAscending)}`}
-                    onClick={() => sortPeopleByField(headerKey)}
+                    onClick={() => sortCharactersByField(headerKey, !isSortAscending)}
                   ></span>
                 </th>
               ))}

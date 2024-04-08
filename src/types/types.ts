@@ -10,3 +10,5 @@ export interface IColumn {
 }
 
 export type SetCurrentPageType = (page: number) => void;
+
+export type SortOrder = 'asc' | 'desc';
