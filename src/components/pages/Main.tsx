@@ -1,5 +1,5 @@
 import { COLUMNS } from '@/constants/columns';
-import { ITEMS_PER_PAGE } from '@/constants/constants';
+import { ITEMS_PER_PAGE } from '@/constants/settings';
 import { getSortSymbolClass } from '@/constants/sortSymbols';
 import { store } from '@/store/Store';
 import '@/styles/main.scss';
@@ -140,7 +140,7 @@ const TableComponent: React.FC = observer(() => {
   };
 
   return (
-    <div className="site-container">
+    <div className="full-width-background">
       <ToastContainer />
       <ConfirmationModal
         isOpen={isModalVisible}
@@ -149,7 +149,7 @@ const TableComponent: React.FC = observer(() => {
         name={nameDeletedCharacter}
       />
       <Header />
-      <main>
+      <main className="main-container">
         <table>
           <thead>
             <tr>

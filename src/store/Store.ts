@@ -1,6 +1,6 @@
 import { i18n } from '@/App';
 import { apiService } from '@/api/apiService';
-import { ITEMS_PER_PAGE } from '@/constants/constants';
+import { ITEMS_PER_PAGE } from '@/constants/settings';
 import { ICharacter } from '@/types/api';
 import { IStore } from '@/types/storeTypes';
 import { action, makeAutoObservable } from 'mobx';
@@ -67,7 +67,7 @@ class Store implements IStore {
   setDataCharacters = async () => {
     try {
       this.isLoading = true;
-      const data = await apiService.fetchDataCharacters();
+      const data = await apiService.fetchCharacters();
       this.setCharacters(data);
       toast.success(i18n.t('success_data_load'), {
         autoClose: 1500,

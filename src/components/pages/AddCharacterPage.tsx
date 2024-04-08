@@ -2,7 +2,6 @@ import { numericValidationRegex, wordValidationRegex } from '@/constants/validat
 import { store } from '@/store/Store';
 import '@/styles/main.scss';
 import { ICharacter } from '@/types/api';
-import { FormValues } from '@/types/formTypes';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { observer } from 'mobx-react-lite';
 import React from 'react';
@@ -38,7 +37,7 @@ const AddCharacterPage: React.FC = observer(() => {
       .required(t('validation.mass.required')),
   });
 
-  const handleSubmit = (
+  const handleSubmit = async (
     values: ICharacter,
     { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void },
   ) => {
@@ -66,7 +65,7 @@ const AddCharacterPage: React.FC = observer(() => {
         ×
       </Link>
       <h1>{t('add_character')}</h1>
-      <Formik<FormValues>
+      <Formik
         initialValues={{
           name: '',
           gender: '',
