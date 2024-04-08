@@ -54,7 +54,7 @@ $ git clone git@github.com:canekg/CharacterTable.git
 2. Установить зависимости
 
 ```bash
-$ npm install
+$ npm ci
 ```
 
 3. Запустите проект
