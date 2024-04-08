@@ -4,7 +4,8 @@
   border-bottom: 1px solid $border-color;
   background: linear-gradient(to right, $primary-color, $secondary-color);
   padding-bottom: 10px; 
-
+  box-sizing: border-box;
+  
   .header-content {
     display: flex;
     flex-wrap: wrap;
@@ -14,6 +15,7 @@
     max-width: 85%;
     height: 100px;
     padding: 1em;
+    flex-shrink: 0;
   }
 
   .header-content .title {
@@ -65,12 +67,11 @@
 @media (max-width: 768px) {
   .header {
     padding: 0.25em;
-    align-items: center;
+    align-content: center;
     .header-content {
       margin: 0; 
       padding: 0;
-      max-width: none;
-      width: 100%;
+      min-width: 100%;
     }
   }
   .header .header-content .title {
