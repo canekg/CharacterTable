@@ -6,20 +6,20 @@ import '@/styles/main.scss';
 import { ICharacter } from '@/types/api';
 import { ResizingState } from '@/types/storeTypes';
 import { HeaderMap } from '@/types/types';
+import { closeModal, confirmDeletion, openModal } from '@/utils/modal';
+import { goToFirstPage, goToLastPage, goToNextPage, goToPreviousPage } from '@/utils/pagination';
 import {
   loadResizingState,
   onResizeMouseDown,
   saveResizingState,
   updateDimensions,
 } from '@/utils/resizing';
-
-import { closeModal, confirmDeletion, openModal } from '@/utils/modal';
-import { goToFirstPage, goToLastPage, goToNextPage, goToPreviousPage } from '@/utils/pagination';
 import { observer } from 'mobx-react-lite';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import ConfirmationModal from '../common/modal/ConfirmationModal';
 import Footer from '../layout/Footer';
 import Header from '../layout/Header';
 
@@ -146,15 +146,12 @@ const TableComponent: React.FC = observer(() => {
   return (
     <div className="site-container">
       <ToastContainer />
-      {isModalVisible && (
-        <div className="modal-container">
-          <div className="modal">
-            <p>{t('modal.confirm_deletion_message', { name: nameDeletedCharacter })}</p>
-            <button onClick={handleConfirmDeletion}>{t('modal.confirm')}</button>
-            <button onClick={handleCloseModal}>{t('modal.cancel')}</button>
-          </div>
-        </div>
-      )}
+      <ConfirmationModal
+        isOpen={isModalVisible}
+        onClose={handleCloseModal}
+        onConfirm={handleConfirmDeletion}
+        name={nameDeletedCharacter}
+      />
       <Header />
       <main>
         <table>
