@@ -1,102 +1,118 @@
 .header {
-  background: linear-gradient(to right, $primary-color, $secondary-color);
-  padding: 1em;
+  width: 100%;
+  margin: 0;
   border-bottom: 1px solid $border-color;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 auto;
+  background: linear-gradient(to right, $primary-color, $secondary-color);
+  padding-bottom: 10px; /* Уменьшаем внутренний отступ снизу до 10px */
 
-  .title {
+  .header-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 75%;
+    height: 100px;
+    padding: 1em;
+  }
+
+  .header-content .title {
+    flex-basis: 100%;
     color: $font-color;
     font-size: calc(1.4em + 1vw);
-    flex-basis: 100%;
   }
 
-  .buttons {
+  .header-content .buttons {
     display: flex;
     gap: 10px;
-    button {
-      @include button-style;
-    }
+    flex-shrink: 1;
   }
-  .language-toggle {
-    padding: 10px 20px;
+
+  .header-content .buttons button {
+    @include button-style;
+    font-size: calc(0.6em + 0.7vw);
+    padding: 0.4em 0.8em;
+  }
+
+  .header-content .language-toggle {
+    margin-left: auto;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition:
       background-color 0.3s,
       transform 0.2s;
+    font-size: calc(0.6em + 0.7vw);
+    padding: 0.4em 0.8em;
+  }
 
-    &:hover {
-      background-color: #3c6b8f;
-      transform: scale(1.05);
-    }
+  .header-content .language-toggle:hover {
+    background-color: #3c6b8f;
+    transform: scale(1.05);
+  }
 
-    &:focus {
-      outline: none;
-      box-shadow: 0 0 0 2px rgba(52, 86, 139, 0.5);
-    }
+  .header-content .language-toggle:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(52, 86, 139, 0.5);
+  }
 
-    &:active {
-      transform: scale(0.95);
-    }
+  .header-content .language-toggle:active {
+    transform: scale(0.95);
   }
 }
 
 @media (max-width: 768px) {
   .header {
     padding: 0.25em;
-    .title {
-      font-size: calc(0.8em + 1.7vw);
-    }
-    .buttons {
-      button {
-        font-size: calc(0.6em + 0.7vw);
-        padding: 0.4em 0.8em;
-      }
-    }
-    .language-toggle {
-      font-size: calc(0.6em + 0.7vw);
-      padding: 0.4em 0.8em;
-    }
+  }
+
+  .header .header-content .title {
+    font-size: calc(0.8em + 1.7vw);
+  }
+
+  .header .header-content .buttons button {
+    font-size: calc(0.6em + 0.7vw);
+    padding: 0.4em 0.8em;
+  }
+
+  .header .header-content .language-toggle {
+    font-size: calc(0.6em + 0.7vw);
+    padding: 0.4em 0.8em;
   }
 }
 
 @media (max-width: 480px) {
-  .header .title {
+  .header .header-content .title {
     font-size: calc(0.9em + 1.5vw);
   }
-  .header {
-    .buttons {
-      button {
-        font-size: calc(0.6em + 0.5vw);
-        padding: 0.4em 0.8em;
-      }
-    }
-    .language-toggle {
-      font-size: calc(0.6em + 0.5vw);
-      padding: 0.4em 0.8em;
-    }
+
+  .header .header-content .buttons {
+    max-width: 85%;
+  }
+
+  .header .header-content .buttons button {
+    font-size: calc(0.6em + 0.5vw);
+    padding: 0.4em 0.1em;
+  }
+
+  .header .header-content .language-toggle {
+    font-size: calc(0.6em + 0.5vw);
+    padding: 0.4em 0.8em;
   }
 }
 
 @media (max-width: 320px) {
-  .header .title {
+  .header .header-content .title {
     font-size: calc(0.9em + 0.6vw);
   }
-  .header {
-    .buttons {
-      button {
-        font-size: calc(0.5em + 0.5vw);
-        padding: 0.4em 0.8em;
-      }
-    }
-    .language-toggle {
-      font-size: calc(0.5em + 0.5vw);
-      padding: 0.4em 0.8em
-    }
+
+  .header .header-content .buttons button {
+    font-size: calc(0.5em + 0.5vw);
+    padding: 0.4em 0.4em;
+  }
+
+  .header .header-content .language-toggle {
+    font-size: calc(0.5em + 0.5vw);
+    padding: 0.4em 0.8em;
   }
 }

@@ -1,23 +1,23 @@
 .footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
   background: linear-gradient(to left, $primary-color, $secondary-color);
-  padding: 1em;
-  border-top: 1px solid $border-color;
+  padding: 0;
+  box-sizing: border-box;
+  padding: 1em; /* Перемещено в начало для соблюдения порядка */
+  border-top: 1px solid $border-color; /* Перемещено после padding */
   color: $font-color;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  box-sizing: border-box;
-  position: absolute;
-  bottom: 0;
-  padding: 0;
 
-  .content {
-    text-align: center;
-    flex-basis: 100%;
+  .footer-content {
+    width: 75%;
+    text-align: center; /* Перемещено перед width */
     p {
-      font-size: calc(0.6em + 1vw); 
       margin: 0.5em 0;
+      font-size: calc(0.6em + 1vw); 
     }
   }
 
@@ -26,8 +26,8 @@
     justify-content: center;
     gap: 20px;
     a {
-      color: #0b437e;
       font-size: 1.3em; 
+      color: #0b437e;
       transition: color 0.3s ease;
 
       &:hover {

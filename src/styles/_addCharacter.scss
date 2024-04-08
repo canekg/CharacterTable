@@ -8,66 +8,69 @@
   margin: 20px auto;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   font-size: 1.3vw;
-  h1 {
-    text-align: center;
-    margin-top: 0;
-  }
-  input::placeholder {
-    font-size: 1.5vw;
-  }
+}
 
-  .close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    border: none;
-    background: transparent;
-    font-size: calc(2em + 0.5vw);
-    cursor: pointer;
-    text-decoration: none;
-    &:hover {
-      color: #d32f2f;
-    }
-  }
+h1 {
+  text-align: center;
+  margin-top: 0;
+}
 
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+input::placeholder {
+  font-size: 1.5vw;
+}
 
-    input {
-      border: 2px solid #f9c1d9;
-      border-radius: 5px;
-      padding: 10px;
-      font-size: 16px;
+.close-button {
+  position: absolute;
+  // top: 10px;
+  right: 10px;
+  border: none;
+  background: transparent;
+  font-size: calc(2em + 0.5vw);
+  cursor: pointer;
+  text-decoration: none;
+}
 
-      &:focus {
-        border-color: #f6a5c0;
-        outline: none;
-        box-shadow: 0 0 0 3px rgba(246, 165, 192, 0.5);
-      }
-    }
+.close-button:hover {
+  color: #d32f2f;
+}
 
-    button {
-      background-color: #f6a5c0;
-      color: #fff;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 1.5vw;
-      transition: background-color 0.5s;
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
 
-      &:hover {
-        background-color: darken(#f6a5c0, 10%);
-      }
+form input {
+  border: 2px solid #f9c1d9;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+}
 
-      &:disabled {
-        background-color: #fcd5e4;
-        cursor: default;
-      }
-    }
-  }
+form input:focus {
+  border-color: #f6a5c0;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(246, 165, 192, 0.5);
+}
+
+form button {
+  background-color: #f6a5c0;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.5vw;
+  transition: background-color 0.5s;
+}
+
+form button:hover {
+  background-color: darken(#f6a5c0, 10%);
+}
+
+form button:disabled {
+  background-color: #fcd5e4;
+  cursor: default;
 }
 
 .error {
@@ -78,17 +81,15 @@
 @media (min-width: 1200px) {
   .add-character-page {
     font-size: 16px;
-    .close-button {
-      font-size: 36px;
-    }
-    input::placeholder {
-      font-size: 16px;
-    }
-    form {
-      button {
-        font-size: 18px;
-      }
-    }
+  }
+  .add-character-page .close-button {
+    font-size: 36px;
+  }
+  .add-character-page input::placeholder {
+    font-size: 16px;
+  }
+  .add-character-page form button {
+    font-size: 18px;
   }
 }
 
@@ -96,14 +97,12 @@
   .add-character-page {
     padding: 15px;
     width: 80%;
-    .close-button {
-      font-size: calc(2em + 0.5vw);
-    }
-    form {
-      button {
-        font-size: 1.8vw;
-      }
-    }
+  }
+  .add-character-page .close-button {
+    font-size: calc(2em + 0.5vw);
+  }
+  .add-character-page form button {
+    font-size: 1.8vw;
   }
 }
 
@@ -113,33 +112,29 @@
     width: 95%;
     max-width: none;
     font-size: calc(0.1em + 1.5vw);
-    .close-button {
-      font-size: calc(2.5em + 0.5vw);
-    }
-    input::placeholder {
-      font-size: calc(0.4em + 1.5vw);
-    }
-    form {
-      button {
-        font-size: calc(0.7em + 2vw);
-      }
-    }
+  }
+  .add-character-page .close-button {
+    font-size: calc(2.5em + 0.5vw);
+  }
+  .add-character-page input::placeholder {
+    font-size: calc(0.4em + 1.5vw);
+  }
+  .add-character-page form button {
+    font-size: calc(0.7em + 2vw);
   }
 }
 
 @media (max-width: 320px) {
   .add-character-page {
     font-size: 8px;
-    .close-button {
-      font-size: 22px;
-    }
-    input::placeholder {
-      font-size: 8px;
-    }
-    form {
-      button {
-        font-size: 12px;
-      }
-    }
+  }
+  .add-character-page .close-button {
+    font-size: 22px;
+  }
+  .add-character-page input::placeholder {
+    font-size: 8px;
+  }
+  .add-character-page form button {
+    font-size: 12px;
   }
 }
