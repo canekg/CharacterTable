@@ -31,6 +31,7 @@ body {
   height: 100%;
   background-color: $color-background;
   z-index: -1;
+  min-height: 370px;
 }
 
 @media (max-width: 768px) {
@@ -39,8 +40,7 @@ body {
     max-width: none;
   }
   .main-container {
-    width: 100%;
-    margin: 0;
+    width: 99%;
     max-width: none;
   }
 }
