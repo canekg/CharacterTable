@@ -31,7 +31,7 @@ body {
   height: 100%;
   background-color: $color-background;
   z-index: -1;
-  min-height: 370px;
+  min-height: calc(370px + 17vw);
 }
 
 @media (max-width: 768px) {
